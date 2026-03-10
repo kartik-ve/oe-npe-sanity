@@ -8,6 +8,9 @@ SE_BASE=/users/gen/sewrk1/JEE/SEDomain/logs/SEServer
 SE_WORKSPACE=${SE_BASE}/sanity_logs
 SE_BUILD=${SE_WORKSPACE}/${JOB_NAME}_${BUILD_NUMBER}
 
+# remove
+cp -r /toolsnas_CHR/tooladm/OE/OE-NPE-SANITY/* .
+
 declare -A HOSTS=(
   [SIT1]=mwhlvchca01
   [QA1]=mwhlvchca02
