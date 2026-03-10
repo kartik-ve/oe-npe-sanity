@@ -19,7 +19,7 @@ public class LogSearch {
 
         try (BufferedReader br = new BufferedReader(new FileReader(args[0]), 32 * 1024);
                 BufferedWriter uniqueOverall = new BufferedWriter(new FileWriter(fileName + ".err"));
-                BufferedWriter uniqueInSession = new BufferedWriter(new FileWriter(fileName + "_uniq_sesh.err"));
+                // BufferedWriter uniqueInSession = new BufferedWriter(new FileWriter(fileName + "_uniq_sesh.err"));
                         ) {
             findAndLogErrors(br, uniqueOverall, null);
         } catch (Exception e) {
