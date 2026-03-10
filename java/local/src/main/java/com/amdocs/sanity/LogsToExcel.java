@@ -20,7 +20,15 @@ final class LogsToExcel {
     private LogsToExcel() {
     }
 
-    static void log(Path logFile, Path excelPath, String flow, int project, String dmp, String env, String tester) throws IOException {
+    static void log(
+            Path logFile,
+            Path excelPath,
+            String flow,
+            int project,
+            String dmp,
+            String env,
+            String tester)
+            throws IOException {
         List<String> exceptions;
 
         Flow f;
@@ -108,8 +116,14 @@ final class LogsToExcel {
         }
     }
 
-    private static void createExcel(List<String> exceptions, Path excelPath,
-            Flow flow, int project, String dmp, String env, String tester) throws IOException {
+    private static void createExcel(
+            List<String> exceptions,
+            Path excelPath,
+            Flow flow,
+            int project,
+            String dmp,
+            String env,
+            String tester) throws IOException {
 
         File file = excelPath.toFile();
         Workbook workbook;
