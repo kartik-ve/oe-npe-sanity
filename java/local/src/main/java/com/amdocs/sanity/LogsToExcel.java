@@ -22,7 +22,7 @@ final class LogsToExcel {
 
     static void log(
             Path logFile,
-            Path excelPath,
+            Path excelFilePath,
             String flow,
             int project,
             String dmp,
@@ -40,7 +40,7 @@ final class LogsToExcel {
 
         try (BufferedReader br = new BufferedReader(new FileReader(logFile.toFile()), 32 * 1024);) {
             exceptions = findErrors(br);
-            createExcel(exceptions, excelPath, f, project, dmp, env, tester);
+            createExcel(exceptions, excelFilePath, f, project, dmp, env, tester);
         }
     }
 
@@ -118,14 +118,14 @@ final class LogsToExcel {
 
     private static void createExcel(
             List<String> exceptions,
-            Path excelPath,
+            Path excelFilePath,
             Flow flow,
             int project,
             String dmp,
             String env,
             String tester) throws IOException {
 
-        File file = excelPath.toFile();
+        File file = excelFilePath.toFile();
         Workbook workbook;
 
         if (file.exists()) {
