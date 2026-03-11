@@ -66,17 +66,16 @@ final class LogsToExcel {
                     }
                 }
 
-                if (!isDigitOnly) {
+                if (isDigitOnly) {
                     break;
                 }
             }
 
+            exception.append(line);
             openTags += calculateOpenTags(line);
             if (openTags == 0) {
                 exceptions.add(exception.toString().trim());
                 exception.setLength(0);
-            } else {
-                exception.append(line);
             }
         }
 
