@@ -40,7 +40,7 @@ ssh sewrk1@${HOST} "mkdir -p ${SE_BUILD}"
 scp java/remote/LogSearch.java sewrk1@${HOST}:${SE_WORKSPACE}
 ssh sewrk1@${HOST} "javac -d ${SE_WORKSPACE} ${SE_WORKSPACE}/LogSearch.java"
 
-PROJECT="${WORKSPACE}/xml/${ENV}.xml"
+PROJECT="${WORKSPACE}/xml/OE-Sanity.xml"
 REPORT_DIR="${WORKSPACE}/${BUILD_NUMBER}/junit_report"
 
 TESTSUITE_PREFIX=
@@ -76,6 +76,7 @@ for S in NC COS CE RP Move Bulk SU COAM; do
   esac
 
   /opt/SoapUI-5.5.0/bin/testrunner.sh \
+    -Denv=${ENV} \
     -s "${TESTSUITE_PREFIX}${TESTSUITE}" \
     -j -f "${REPORT_DIR}/${TESTSUITE_PREFIX}${TESTSUITE}" \
     -r "${PROJECT}" \
