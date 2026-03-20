@@ -37,6 +37,11 @@ ssh omswrk1@${HOST} \
   | xargs -r kill" \
 || true
 
+ssh omswrk1@${HOST} \
+  "find ${OMS_WORKSPACE} -mindepth 1 -mmin +360 -exec rm -rf {} +"
+ssh sewrk1@${HOST} \
+  "find ${SE_WORKSPACE} -mindepth 1 -mmin +360 -exec rm -rf {} +"
+
 set -e
 
 ssh omswrk1@${HOST} "mkdir -p ${OMS_BUILD}"
