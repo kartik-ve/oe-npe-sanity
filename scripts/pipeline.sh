@@ -106,6 +106,10 @@ ERROR_DIR=${BUILD_DIR}/error_logs
 
 mkdir -p "${ERROR_DIR}"
 scp omswrk1@${HOST}:${OMS_BUILD}/*.err "${ERROR_DIR}"
+scp sewrk1@${HOST}:${SE_BUILD}/*.err "${ERROR_DIR}"
+
+ssh omswrk1@${HOST} "rm -r ${OMS_BUILD}" || true
+ssh sewrk1@${HOST} "rm -r ${SE_BUILD}" || true
 
 java -cp "java/local/target/classes:java/local/target/dependency/*" \
   com.amdocs.sanity.SanityRunner \
