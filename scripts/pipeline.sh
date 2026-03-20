@@ -54,16 +54,6 @@ if [ "${SANITY_TYPE}" == "Basic" ]; then
 fi
 
 for S in NC COS CE RP Move Bulk SU COAM; do
-  echo Running flow ${S}
-
-  ssh omswrk1@${HOST} \
-    "tail -fn 0 \$(ls -t ${OMS_BASE}/weblogic.*.log | head -1) \
-      > ${OMS_BUILD}/${S}.log 2>&1 & echo \$! > ${OMS_BUILD}/${S}.pid"
-  
-  ssh sewrk1@${HOST} \
-    "tail -fn 0 \$(ls -t ${SE_BASE}/weblogic.*.log | head -1) \
-      > ${SE_BUILD}/${S}.log 2>&1 & echo \$! > ${SE_BUILD}/${S}.pid"
-
   case "${S}" in
     NC)   TESTSUITE="New Connect" ;;
     COS)  TESTSUITE="Change of Service" ;;
@@ -79,6 +69,16 @@ for S in NC COS CE RP Move Bulk SU COAM; do
       TESTSUITE="CO & AM"
       ;;
   esac
+
+  echo Running flow ${TESTSUITE}
+
+  ssh omswrk1@${HOST} \
+    "tail -fn 0 \$(ls -t ${OMS_BASE}/weblogic.*.log | head -1) \
+      > ${OMS_BUILD}/${S}.log 2>&1 & echo \$! > ${OMS_BUILD}/${S}.pid"
+  
+  ssh sewrk1@${HOST} \
+    "tail -fn 0 \$(ls -t ${SE_BASE}/weblogic.*.log | head -1) \
+      > ${SE_BUILD}/${S}.log 2>&1 & echo \$! > ${SE_BUILD}/${S}.pid"
 
   /opt/SoapUI-5.5.0/bin/testrunner.sh \
     -Denv=${ENV} \
