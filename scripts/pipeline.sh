@@ -1,3 +1,8 @@
+if [ -z "${ENV}" ]; then
+  echo "ERROR: 'ENV' parameter not passed" >&2
+  exit 1
+fi
+
 BUILD_DIR=${BUILD_NUMBER}
 
 OMS_BASE=/users/gen/omswrk1/JEE/OMS/logs/OmsDomain/OmsServer
