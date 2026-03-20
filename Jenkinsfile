@@ -45,15 +45,23 @@ pipeline {
 
     post {
         always {
-            emailext(
-                subject: "${env.JOB_NAME} - #${params.ENV} Build #${env.BUILD_NUMBER}",
-                from: "jenkins@mwhlvchcatools01",
-                to: "AQE-OffShoreGTM_Testing@int.amdocs.com",
-                replyTo: "kartikve@amdocs.com",
-                body: readFile("${env.BUILD_NUMBER}/summary-report.html"),
-                mimeType: 'text/html',
-                attachmentsPattern: "${env.BUILD_NUMBER}/*.*"
-            )
+            script {
+                def reportContent = "Error: Report Not Found!"
+            
+                if (fileExists("${env.BUILD_NUMBER}/summary-report.html")) {
+                    reportContent = readFile("${env.BUILD_NUMBER}/summary-report.html")
+                } 
+
+                emailext(
+                    subject: "${env.JOB_NAME} - #${params.ENV} Build #${env.BUILD_NUMBER}",
+                    from: "jenkins@mwhlvchcatools01",
+                    to: "AQE-OffShoreGTM_Testing@int.amdocs.com",
+                    replyTo: "kartikve@amdocs.com",
+                    body: readFile("${env.BUILD_NUMBER}/summary-report.html"),
+                    mimeType: 'text/html',
+                    attachmentsPattern: "${env.BUILD_NUMBER}/*.*"
+                )
+            }
         }
     }
 }
