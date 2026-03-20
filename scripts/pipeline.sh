@@ -26,11 +26,15 @@ declare -A HOSTS=(
 HOST=${HOSTS[$ENV]}
 
 ssh omswrk1@${HOST} \
-  "ps -eo pid,etimes,cmd | awk '\$2 >= 21600 && \$0 ~ /tail -fn 0 \/users\/gen\/omswrk1\/JEE\/OMS\/logs\/OmsDomain\/OmsServer\/weblogic/ {print \$1}' | xargs -r kill -9" \
+  "ps -eo pid,etimes,cmd \
+  | awk '\$2 >= 21600 && \$0 ~ /tail -fn 0 \/users\/gen\/omswrk1\/JEE\/OMS\/logs\/OmsDomain\/OmsServer\/weblogic/ {print \$1}' \
+  | xargs -r kill" \
 || true
 
 ssh omswrk1@${HOST} \
-  "ps -eo pid,etimes,cmd | awk '\$2 >= 21600 && \$0 ~ /tail -fn 0 \/users\/gen\/sewrk1\/JEE\/SEDomain\/logs\/SEServer\/weblogic/ {print \$1}' | xargs -r kill -9" \
+  "ps -eo pid,etimes,cmd \
+  | awk '\$2 >= 21600 && \$0 ~ /tail -fn 0 \/users\/gen\/sewrk1\/JEE\/SEDomain\/logs\/SEServer\/weblogic/ {print \$1}' \
+  | xargs -r kill" \
 || true
 
 set -e
