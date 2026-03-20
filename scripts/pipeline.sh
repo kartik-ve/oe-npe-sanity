@@ -74,7 +74,7 @@ for S in NC COS CE RP Move Bulk SU COAM; do
     SU)   TESTSUITE="Seasonal Suspend" ;;
     COAM)
       if [ "${SANITY_TYPE}" != "Basic" ]; then
-        break
+        continue
       fi
       TESTSUITE="CO & AM"
       ;;
