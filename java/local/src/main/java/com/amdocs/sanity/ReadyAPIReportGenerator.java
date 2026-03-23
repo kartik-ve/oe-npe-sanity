@@ -399,9 +399,8 @@ final class ReadyAPIReportGenerator {
         }
 
         List<File> xmlFiles = new ArrayList<>();
-        File input = new File(junitPath);
 
-        if (!input.isDirectory()) {
+        if (!new File(junitPath).isDirectory()) {
             throw new IllegalArgumentException("Provided JUnit path is not a directory: " + junitPath);
         }
 
