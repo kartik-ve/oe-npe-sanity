@@ -390,7 +390,7 @@ final class ReadyAPIReportGenerator {
         }
     }
 
-    static ReportSummary generateReport(String inputPath, String outputPath, String jobName, String apiResponsesDir,
+    static ReportSummary generateReport(String junitPath, String outputPath, String jobName, String apiResponsesDir,
             Consumer<String> logger) throws IOException, ParserConfigurationException, SAXException {
 
         if (logger == null) {
@@ -399,14 +399,14 @@ final class ReadyAPIReportGenerator {
         }
 
         List<File> xmlFiles = new ArrayList<>();
-        File input = new File(inputPath);
+        File input = new File(junitPath);
 
         if (!input.isDirectory()) {
-            throw new IllegalArgumentException("Input path is not a directory: " + inputPath);
+            throw new IllegalArgumentException("Provided JUnit path is not a directory: " + junitPath);
         }
 
         // Process all XML files in directory
-        try (Stream<Path> paths = Files.walk(Paths.get(inputPath))) {
+        try (Stream<Path> paths = Files.walk(Paths.get(junitPath))) {
             xmlFiles = paths
                     .filter(Files::isRegularFile)
                     .filter(p -> p.toString().endsWith(".xml"))
@@ -416,7 +416,7 @@ final class ReadyAPIReportGenerator {
         }
 
         if (xmlFiles.isEmpty()) {
-            throw new IllegalArgumentException("No XML files found in input path: " + inputPath);
+            throw new IllegalArgumentException("No XML files found in input path: " + junitPath);
         }
 
         logger.accept("Found " + xmlFiles.size() + " XML file(s)");
