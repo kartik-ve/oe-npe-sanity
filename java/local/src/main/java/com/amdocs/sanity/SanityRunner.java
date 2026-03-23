@@ -10,7 +10,6 @@ public final class SanityRunner {
     }
 
     public static void main(String[] args) {
-
         Map<String, String> params = parseArgs(args);
 
         Properties config = new Properties();
