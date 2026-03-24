@@ -57,7 +57,7 @@ pipeline {
                     from: "jenkins@mwhlvchcatools01",
                     to: "AQE-OffShoreGTM_Testing@int.amdocs.com, sandesga@amdocs.com, Darshan.Derle@amdocs.com",
                     replyTo: "kartikve@amdocs.com",
-                    body: readFile("${env.BUILD_NUMBER}/summary-report.html"),
+                    body: reportContent,
                     mimeType: 'text/html',
                     attachmentsPattern: "${env.BUILD_NUMBER}/*.*"
                 )
